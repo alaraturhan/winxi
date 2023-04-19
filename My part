@@ -1,0 +1,45 @@
+non_floats = []
+for col in train:
+    if train[col].dtypes != "float64":
+        non_floats.append(col)
+train_2 = train.drop(columns=non_floats)
+
+train_2.shape
+
+train_2.head()
+
+# Finding the number of columns containing NaN values
+null_columns = train.columns[train.isnull().any()]
+null_count = train[null_columns].isnull().sum()
+
+print(null_count)
+if train.isnull().any().any():
+    print("There are still NaN values in the DataFrame.")
+else:
+    print("There are no NaN values in the DataFrame.")
+    
+    
+    --
+    # Plot a histogram of the 'Age' column
+plt.hist(train['column62'], color=['red'])
+plt.show()
+
+train.plot.scatter(x='column62', y='column120')
+plt.show()
+# Show the histograms of the 1st and 2nd columns in the same graph
+plt.hist(train['column62'], bins=10, alpha=0.5, label='1. Sütun')
+plt.hist(train['column120'], bins=10, alpha=0.5, label='2. Sütun')
+
+# Set axis labels and title
+plt.xlabel('Değer')
+plt.ylabel('Sayı')
+plt.title('Histogram of Columns 62 and 120')
+
+# Add horizontal line (average)
+plt.axvline(train['column62'].mean(), color='red', linestyle='dashed', linewidth=1)
+plt.axvline(train['column120'].mean(), color='green', linestyle='dashed', linewidth=1)
+
+# Show visualization
+plt.legend()
+plt.show()
+    
